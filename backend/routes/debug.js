@@ -36,9 +36,18 @@ router.get('/admin', (req, res) => {
   const { admin } = req.query;
   // VULNERABILITY: Weak protection (query param)
   if (admin === 'true') {
-    res.json({ message: 'Welcome to the Admin Panel!', info: 'All users are listed here (not really, just a mock)' });
+    const db = require('../db');
+    // VULNERABILITY: Dumps ALL user data including plaintext passwords
+    db.all(`SELECT * FROM users`, (err, users) => {
+      if (err) return res.status(500).json({ error: err.message });
+      res.json({
+        message: 'Welcome to the Admin Panel!',
+        total_users: users.length,
+        users: users // LEAKS passwords
+      });
+    });
   } else {
-    res.status(403).json({ error: 'Access denied. Use ?admin=true to access admin panel' });
+    res.status(403).json({ error: 'Access denied' });
   }
 });
 

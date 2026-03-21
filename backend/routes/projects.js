@@ -59,4 +59,45 @@ router.delete('/:id', (req, res) => {
   });
 });
 
+// ==========================================
+// VULNERABILITY #10: CSV INJECTION
+// GET /api/projects/export
+// Exports project data as CSV without sanitizing
+// formulas like =CMD(), allowing spreadsheet injection
+// ==========================================
+router.get('/export/csv', (req, res) => {
+  db.all(`SELECT * FROM projects`, (err, rows) => {
+    if (err) return res.status(500).json({ error: err.message });
+
+    // VULNERABILITY: No sanitization of values containing = + - @ 
+    let csv = 'id,name,description,owner_id,is_public\n';
+    rows.forEach(row => {
+      csv += `${row.id},"${row.name}","${row.description}",${row.owner_id},${row.is_public}\n`;
+    });
+
+    res.setHeader('Content-Type', 'text/csv');
+    res.setHeader('Content-Disposition', 'attachment; filename="projects.csv"');
+    res.send(csv);
+  });
+});
+
+// ==========================================
+// VULNERABILITY: MASS UPDATE (no ownership check)
+// PUT /api/projects/:id
+// Any authenticated user can update any project
+// ==========================================
+router.put('/:id', (req, res) => {
+  if (!req.user) return res.status(401).json({ error: 'Unauthorized' });
+  const { name, description, is_public } = req.body;
+
+  // VULNERABILITY: No ownership check + raw description (Stored XSS)
+  db.run(`UPDATE projects SET name = ?, description = ?, is_public = ? WHERE id = ?`,
+    [name, description, is_public ? 1 : 0, req.params.id],
+    function(err) {
+      if (err) return res.status(500).json({ error: err.message });
+      res.json({ message: 'Project updated', id: req.params.id });
+    }
+  );
+});
+
 module.exports = router;
