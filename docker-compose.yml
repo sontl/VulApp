@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "5001:5001"
+    volumes:
+      - ./backend/server.js:/app/server.js
+      - ./backend/db.js:/app/db.js
+      - ./backend/routes:/app/routes
+      - ./backend/middleware:/app/middleware
+      - ./backend/uploads:/app/uploads
+      - ./backend/package.json:/app/package.json
+    environment:
+      - PORT=5001
+      - NODE_ENV=development
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./frontend/src:/app/src
+      - ./frontend/public:/app/public
+      - ./frontend/index.html:/app/index.html
+      - ./frontend/package.json:/app/package.json
+      - ./frontend/vite.config.js:/app/vite.config.js
+    depends_on:
+      - backend
+    environment:
+      - VITE_API_URL=http://localhost:5001/api
