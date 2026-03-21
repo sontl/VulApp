@@ -12,6 +12,7 @@ services:
       - ./backend/middleware:/app/middleware
       - ./backend/uploads:/app/uploads
       - ./backend/package.json:/app/package.json
+      - ./backend/seed.js:/app/seed.js
     environment:
       - PORT=5001
       - NODE_ENV=development
