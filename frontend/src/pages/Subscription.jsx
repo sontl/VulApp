@@ -57,7 +57,7 @@ const Subscription = () => {
         ))}
       </div>
 
-      <div className="card" style={{ background: '#111', border: '1px dashed var(--accent-primary)' }}>
+      <div className="card" style={{ background: 'rgba(59, 130, 246, 0.05)', border: '1px dashed var(--accent-primary)', marginTop: '2rem' }}>
         <p><strong>Security Note:</strong> This subscription endpoint is intentionally vulnerable. 
         You can set any <code>plan_type</code> directly via the API without payment verification.</p>
       </div>

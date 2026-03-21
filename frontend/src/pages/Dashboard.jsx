@@ -75,7 +75,7 @@ const Dashboard = () => {
                 <div 
                   className="project-desc" 
                   dangerouslySetInnerHTML={{ __html: p.description }}
-                  style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', margin: '1rem 0', maxHeight: '100px', overflow: 'hidden' }}
+                  style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', margin: '1rem 0', maxHeight: '100px', overflow: 'hidden', background: 'rgba(0,0,0,0.2)', padding: '0.75rem', borderRadius: '8px' }}
                 />
                 <div style={{ fontSize: '0.8rem', opacity: 0.7 }}>
                   {p.is_public ? 'Public' : 'Private'}
@@ -99,8 +99,8 @@ const Dashboard = () => {
             </form>
           </div>
           
-          <div className="card" style={{ marginTop: '1rem', background: '#1a1111', borderColor: '#332222' }}>
-            <h3>Security Hints</h3>
+          <div className="card" style={{ marginTop: '1rem', background: 'rgba(239, 68, 68, 0.05)', borderColor: 'rgba(239, 68, 68, 0.2)' }}>
+            <h3 style={{ color: 'var(--error)' }}>Security Hints</h3>
             <ul style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', marginLeft: '1.2rem', marginTop: '0.5rem' }}>
               <li>Try SQLi: <code>' OR '1'='1</code></li>
               <li>Try XSS: <code>&lt;script&gt;alert(1)&lt;/script&gt;</code></li>

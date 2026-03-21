@@ -84,7 +84,7 @@ const ProjectDetails = () => {
           {/* VULNERABILITY: Stored XSS */}
           <div 
             dangerouslySetInnerHTML={{ __html: project.description }}
-            style={{ background: '#1a1a1a', padding: '1rem', borderRadius: '8px', border: '1px solid var(--border)' }}
+            style={{ background: 'rgba(0, 0, 0, 0.2)', padding: '1rem', borderRadius: '8px', border: '1px solid var(--border)', marginTop: '1rem' }}
           />
         </div>
 
@@ -100,7 +100,7 @@ const ProjectDetails = () => {
           <div className="files-list" style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
             {files.length === 0 && <p>No files uploaded yet.</p>}
             {files.map(f => (
-              <div key={f.id} className="card" style={{ padding: '0.75rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: '#1a1a1a' }}>
+              <div key={f.id} className="card" style={{ padding: '0.75rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'rgba(0,0,0,0.2)' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
                   <File size={18} color="var(--accent-primary)" />
                   <span>{f.filename}</span>

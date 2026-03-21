@@ -19,8 +19,14 @@ const Navbar = () => {
   };
 
   return (
-    <nav>
-      <Link to="/" className="nav-logo" style={{ fontWeight: 800, fontSize: '1.2rem', color: 'white' }}>VulApp</Link>
+    <nav className="navbar">
+      <Link to="/" className="nav-logo">
+        <Shield className="logo-icon" size={28} />
+        <div className="logo-text">
+          <span className="brand-name">TechviFlaw</span>
+          <span className="brand-by">by Techvify</span>
+        </div>
+      </Link>
       <div className="nav-links">
         {token ? (
           <>
@@ -56,9 +62,15 @@ function App() {
           <Route path="/subscription" element={<Subscription />} />
         </Routes>
       </div>
-      <footer style={{ textAlign: 'center', padding: '2rem', color: 'var(--text-secondary)', fontSize: '0.8rem' }}>
-        <p>Deliberately Vulnerable SaaS Platform for Security Testing</p>
-        <Link to="/api/debug" target="_blank" style={{ color: '#333' }}>Debug</Link>
+      <footer className="footer-corporate">
+        <div className="footer-content">
+          <p className="footer-brand"><strong>TechviFlaw</strong> - A product of <strong>Techvify</strong></p>
+          <p className="footer-tagline">Purposely Vulnerable Enterprise SaaS Platform for Advanced Security Testing</p>
+        </div>
+        <div className="footer-links">
+          <Link to="/api/debug" target="_blank" className="footer-link">Debug console</Link>
+          <span className="footer-copyright">© {new Date().getFullYear()} Techvify Inc. All rights reserved.</span>
+        </div>
       </footer>
     </Router>
   );

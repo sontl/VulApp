@@ -22,7 +22,7 @@ const Register = () => {
     <div style={{ maxWidth: '400px', margin: '4rem auto' }}>
       <div className="card">
         <h1>Register</h1>
-        <p>Join the VulApp platform</p>
+        <p>Join the TechviFlaw platform</p>
         {error && <p style={{ color: 'var(--error)' }}>{error}</p>}
         <form onSubmit={handleSubmit}>
           <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required />
