@@ -18,7 +18,7 @@ const Dashboard = () => {
   const fetchProjects = async () => {
     try {
       const res = await api.get('/projects');
-      setProjects(res.data);
+      setProjects(Array.isArray(res.data) ? res.data : []);
     } catch (err) {
       console.error(err);
     }
@@ -28,7 +28,7 @@ const Dashboard = () => {
     try {
       // VULNERABILITY: SQL Injection search
       const res = await api.get(`/projects/search/name?name=${search}`);
-      setProjects(res.data);
+      setProjects(Array.isArray(res.data) ? res.data : []);
     } catch (err) {
       console.error(err);
     }

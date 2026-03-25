@@ -105,7 +105,7 @@ const ProjectDetails = () => {
                   <File size={18} color="var(--accent-primary)" />
                   <span>{f.filename}</span>
                 </div>
-                <a href={`http://localhost:5001/uploads/${f.filename}`} target="_blank" rel="noreferrer" style={{ color: 'var(--text-secondary)' }}>
+                <a href={`${api.defaults.baseURL.replace('/api', '')}/uploads/${f.filename}`} target="_blank" rel="noreferrer" style={{ color: 'var(--text-secondary)' }}>
                   <Download size={18} />
                 </a>
               </div>

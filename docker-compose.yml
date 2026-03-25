@@ -13,9 +13,11 @@ services:
       - ./backend/uploads:/app/uploads
       - ./backend/package.json:/app/package.json
       - ./backend/seed.js:/app/seed.js
+      - ./backend/database.sqlite:/app/database.sqlite
     environment:
       - PORT=5001
       - NODE_ENV=development
+      - SEED_ON_START=${SEED_ON_START:-false}
 
   frontend:
     build: ./frontend
@@ -30,4 +32,4 @@ services:
     depends_on:
       - backend
     environment:
-      - VITE_API_URL=http://localhost:5001/api
+      - VITE_API_URL=${VITE_API_URL:-"http://localhost:5001/api"}
