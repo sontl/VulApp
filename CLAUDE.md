@@ -10,9 +10,9 @@ VulApp (branded as TechviFlaw) is a **deliberately vulnerable** SaaS web applica
 
 ### Docker (recommended)
 ```bash
-docker-compose up --build                      # Start both services
-SEED_ON_START=true docker-compose up --build   # Start and reseed the database
-docker-compose down -v                         # Stop and remove volumes
+docker-compose up --build                       # Start both services (seeds by default)
+SEED_ON_START=false docker-compose up --build   # Start without reseeding
+docker-compose down                             # Stop (database.sqlite is a bind mount, persists on host)
 ```
 
 ### Backend (Express on :5001)

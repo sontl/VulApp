@@ -86,7 +86,7 @@ app.use((err, req, res, next) => {
 app.listen(PORT, () => {
   console.log(`VulApp Backend running on port ${PORT}`);
   if (process.env.SEED_ON_START === 'true') {
-    console.log('SEED_ON_START=true — reseeding database...');
-    require('./seed');
+    const db = require('./db');
+    require('./seed')(db);
   }
 });
